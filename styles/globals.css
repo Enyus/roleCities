@@ -9,7 +9,10 @@ body {
 
 a {
   color: inherit;
-  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
 }
 
 * {
@@ -23,4 +26,10 @@ a {
   --cor-bordas: #C5B589;
   --cor-fundo-botao: #F2A172;
   font-size: 14px;
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    font-size: 20px;
+  }
 }

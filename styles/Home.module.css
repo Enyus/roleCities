@@ -1,0 +1,48 @@
+.container__principal{
+  height: 100vh;
+  width: 100vw;
+  background: url(/parchment\ background.jpg);
+}
+
+.main {
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titulo__principal {
+  color: var(--cor-primaria-texto);
+  font-size: 3rem;
+  margin: 3rem 0;
+}
+
+.formulario {
+  width: 100%;
+  text-align: center;
+  margin: auto 0;
+}
+
+.texto__padrao {
+  color: var(--cor-secundaria-texto);
+  text-align: center;
+}
+
+.texto__link {
+  color: var(--cor-primaria-texto);
+  font-size: 1.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .titulo__principal {
+    justify-self: flex-start;
+  }
+
+  .main {
+    background-image: url(/background-desktop-login.png);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
