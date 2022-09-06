@@ -1,9 +1,14 @@
+import React from 'react'
 import styles from '../styles/Inputs.module.css'
 
-export default function Button(props) {
-  return (
+class Button extends React.Component {
+  render() {
+    return (
     <div className={styles.input__container}>
-        <button type={props.type} id={props.id} className={styles.button__submit}>{props.content}</button>
+        <button type={this.props.type} id={this.props.id} className={styles.button__submit}>{this.props.content}</button>
     </div>
-  )
+    )
+  }
 }
+
+export default Button;
