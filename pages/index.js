@@ -1,7 +1,22 @@
+import * as dotenv from 'dotenv';
+dotenv.config()
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Input from '../components/input'
 import Button from '../components/button'
+import { createClient } from '@supabase/supabase-js'
+
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+
+const supabaseClient = createClient(SUPABASE_URL,SUPABASE_ANON_KEY)
+
+supabaseClient
+  .from('users')
+  .select('*')
+  .then((dados) => {
+    console.log(dados)
+  });
 
 export default function Home() {
   return (
