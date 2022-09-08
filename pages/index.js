@@ -23,11 +23,21 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleCadastro = this.handleCadastro.bind(this);
     this.state = { cadastro: false };
   }
 
   handleClick() {
     this.setState({cadastro: true});
+  }
+
+  handleLogin () {
+    console.log("Login");
+  }
+
+  handleCadastro () {
+    console.log("Cadastro");
   }
 
   render() {
@@ -37,22 +47,22 @@ class Home extends React.Component {
 
     if (!cadastro) {
       formARenderizar = (
-        <form className={styles.formulario}>
+        <form className={styles.formulario} method="POST">
           <Input label="Login" type="email" id="email" placeholder="nome@email.com" />
           <Input label="Senha" type="password" id="password" placeholder="******" />
-          <Button type="submit" id="login" content="Entrar" />
+          <Button type="submit" id="login" content="Entrar" onClick={this.handleLogin} />
           <p className={styles.texto__padrao}>Não possui cadastro?</p>
           <button className={styles.texto__link} onClick={this.handleClick}>Faça Aqui</button>
         </form>
       )
     } else {
       formARenderizar = (
-        <form className={styles.formulario}>
+        <form className={styles.formulario} method="POST">
           <Input label="E-mail" type="email" id="email" placeholder="nome@email.com" />
           <Input label="Nome do Personagem" type="text" id="nome" placeholder="Gandalf" />
           <Input label="Senha" type="password" id="password" placeholder="******" />
           <Input label="Confirma Senha" type="password" id="confirma-password" placeholder="******" />
-          <Button type="submit" id="cadastrar" content="Cadastrar" />
+          <Button type="submit" id="cadastrar" content="Cadastrar" onClick={this.handleCadastro}/>
         </form>
       )
     }

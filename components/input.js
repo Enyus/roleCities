@@ -6,7 +6,7 @@ class Input extends React.Component {
     return (
       <div className={styles.input__container}>
           <label className={styles.input__label} htmlFor={this.props.id}>{this.props.label}</label>
-          <input type={this.props.type} id={this.props.id} className={styles.input__text} placeholder={this.props.placeholder}/>
+          <input type={this.props.type} id={this.props.id} name={this.props.id} className={styles.input__text} placeholder={this.props.placeholder}/>
       </div>
     )
   }
