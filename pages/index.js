@@ -26,7 +26,7 @@ function Home(props) {
 
   if (!cadastro) {
     formARenderizar = (
-      <form className={styles.formulario} method="POST">
+      <form className={styles.formulario} method="POST" action='/principal'>
         <Input label="Login" type="email" id="email" placeholder="nome@email.com" />
         <Input label="Senha" type="password" id="password" placeholder="******" />
         <Button type="submit" id="login" content="Entrar" />
@@ -42,6 +42,9 @@ function Home(props) {
         <Input label="Senha" type="password" id="password" placeholder="******" />
         <Input label="Confirma Senha" type="password" id="confirma-password" placeholder="******" />
         <Button type="submit" id="cadastrar" content="Cadastrar" />
+        <button className={styles.voltar} onClick={() => setCadastro(false)}>
+          <img src='/voltar.png' className={styles.voltar__img}/>
+        </button>
       </form>
     )
   }
