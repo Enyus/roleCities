@@ -5,7 +5,7 @@ import styles from '../styles/Home.module.css'
 import Input from '../components/input'
 import Button from '../components/button'
 import { createClient } from '@supabase/supabase-js'
-import React from 'react';
+import React, { useState } from 'react';
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
@@ -19,69 +19,47 @@ const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 //     console.log(dados)
 //   });
 
-class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleLogin = this.handleLogin.bind(this);
-    this.handleCadastro = this.handleCadastro.bind(this);
-    this.state = { cadastro: false };
-  }
+function Home(props) {
+  const [cadastro, setCadastro] = useState(false);
 
-  handleClick() {
-    this.setState({cadastro: true});
-  }
+  let formARenderizar
 
-  handleLogin () {
-    console.log("Login");
-  }
-
-  handleCadastro () {
-    console.log("Cadastro");
-  }
-
-  render() {
-    let cadastro = this.state.cadastro;
-
-    let formARenderizar
-
-    if (!cadastro) {
-      formARenderizar = (
-        <form className={styles.formulario} method="POST">
-          <Input label="Login" type="email" id="email" placeholder="nome@email.com" />
-          <Input label="Senha" type="password" id="password" placeholder="******" />
-          <Button type="submit" id="login" content="Entrar" onClick={this.handleLogin} />
-          <p className={styles.texto__padrao}>Não possui cadastro?</p>
-          <button className={styles.texto__link} onClick={this.handleClick}>Faça Aqui</button>
-        </form>
-      )
-    } else {
-      formARenderizar = (
-        <form className={styles.formulario} method="POST">
-          <Input label="E-mail" type="email" id="email" placeholder="nome@email.com" />
-          <Input label="Nome do Personagem" type="text" id="nome" placeholder="Gandalf" />
-          <Input label="Senha" type="password" id="password" placeholder="******" />
-          <Input label="Confirma Senha" type="password" id="confirma-password" placeholder="******" />
-          <Button type="submit" id="cadastrar" content="Cadastrar" onClick={this.handleCadastro}/>
-        </form>
-      )
-    }
-
-    return (
-      <div className={styles.container__principal}>
-        <Head>
-          <title>RoleCities</title>
-          <meta name="description" content="Um aplicativo Next/React/Supabase para o desenvolvimento de cidades ligadas ao RPG de mesa" />
-          <link rel="icon" href="/favicon.png" />
-        </Head>
-
-        <main className={styles.main}>
-          <h1 className={styles.titulo__principal}>RoleCities</h1>
-          {formARenderizar}
-        </main>
-      </div>
+  if (!cadastro) {
+    formARenderizar = (
+      <form className={styles.formulario} method="POST">
+        <Input label="Login" type="email" id="email" placeholder="nome@email.com" />
+        <Input label="Senha" type="password" id="password" placeholder="******" />
+        <Button type="submit" id="login" content="Entrar" />
+        <p className={styles.texto__padrao}>Não possui cadastro?</p>
+        <button className={styles.texto__link} onClick={() => {setCadastro(true)}}>Faça Aqui</button>
+      </form>
+    )
+  } else {
+    formARenderizar = (
+      <form className={styles.formulario} method="POST">
+        <Input label="E-mail" type="email" id="email" placeholder="nome@email.com" />
+        <Input label="Nome do Personagem" type="text" id="nome" placeholder="Gandalf" />
+        <Input label="Senha" type="password" id="password" placeholder="******" />
+        <Input label="Confirma Senha" type="password" id="confirma-password" placeholder="******" />
+        <Button type="submit" id="cadastrar" content="Cadastrar" />
+      </form>
     )
   }
+
+  return (
+    <div className={styles.container__principal}>
+      <Head>
+        <title>RoleCities</title>
+        <meta name="description" content="Um aplicativo Next/React/Supabase para o desenvolvimento de cidades ligadas ao RPG de mesa" />
+        <link rel="icon" href="/favicon.png" />
+      </Head>
+
+      <main className={styles.main}>
+        <h1 className={styles.titulo__principal}>RoleCities</h1>
+        {formARenderizar}
+      </main>
+    </div>
+  )
 }
 
 export default Home;
