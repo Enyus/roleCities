@@ -1,10 +1,15 @@
+import React from 'react'
 import styles from '../styles/Inputs.module.css'
 
-export default function Input(props) {
-  return (
-    <div className={styles.input__container}>
-        <label className={styles.input__label} htmlFor={props.id}>{props.label}</label>
-        <input type={props.type} id={props.id} className={styles.input__text} placeholder={props.placeholder}/>
-    </div>
-  )
+class Input extends React.Component {
+  render() {
+    return (
+      <div className={styles.input__container}>
+          <label className={styles.input__label} htmlFor={this.props.id}>{this.props.label}</label>
+          <input type={this.props.type} id={this.props.id} name={this.props.id} className={styles.input__text} placeholder={this.props.placeholder}/>
+      </div>
+    )
+  }
 }
+
+export default Input;
