@@ -26,7 +26,7 @@ function Home(props) {
 
   if (!cadastro) {
     formARenderizar = (
-      <form className={styles.formulario} method="POST" action='/principal'>
+      <form className={styles.formulario} method="GET" action='/principal'>
         <Input label="Login" type="email" id="email" placeholder="nome@email.com" />
         <Input label="Senha" type="password" id="password" placeholder="******" />
         <Button type="submit" id="login" content="Entrar" />
