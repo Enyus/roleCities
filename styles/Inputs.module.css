@@ -4,6 +4,9 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+}
+
+.input__margin {
     margin-bottom: 1.5rem;
 }
 
@@ -16,6 +19,7 @@
     padding: 0.5rem;
     border: solid 2px var(--cor-bordas);
     border-radius: 15px;
+    margin-bottom: 1.5rem;
 }
 
 .input__label {
@@ -27,11 +31,23 @@
 .button__submit {
     color: var(--cor-primaria-texto);
     font-size: 1.5rem;
-    padding: 0.5rem 1rem;
     width: fit-content;
-    max-width: 50%;
+    max-width: 100%;
     font-family: inherit;
     border: solid 3px var(--cor-primaria-texto);
     border-radius: 15px;
     background-color: var(--cor-fundo-botao);
+}
+
+.botao__curto {
+    max-width: 50%;
+    padding: 0.5rem 1rem;
+}
+
+.coluna__unica {
+    grid-column-start: span 1;
+}
+
+.coluna__dupla {
+    grid-column-start: span 2;
 }

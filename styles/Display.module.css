@@ -1,0 +1,28 @@
+.display__geral {
+    width: 100%;
+    text-align: center;
+}
+
+.display__titulo {
+    color: var(--cor-primaria-texto);
+    font-size: 1rem;
+    text-align: center;
+}
+
+.display__conteudo {
+    margin: 0 0.2rem;
+    font-size: 1rem;
+    text-align: center;
+    color: var(--cor-secundaria-texto);
+    background-color: var(--cor-bordas);
+    border: 0.2rem solid var(--cor-primaria-texto);
+    border-radius: 1rem;
+}
+
+.coluna__unica {
+    grid-column-start: span 1;
+}
+
+.coluna__dupla {
+    grid-column-start: span 2;
+}
