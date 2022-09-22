@@ -21,7 +21,7 @@ function Button(props) {
 
   return (
     <div className={esltiloAplicadoDiv}>
-      <button type={props.type} id={props.id} className={esltiloAplicadoBotao}>{props.content}</button>
+      <button type={props.type} id={props.id} className={esltiloAplicadoBotao} disabled={props.disabled}>{props.content}</button>
     </div>
   )
 
