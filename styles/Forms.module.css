@@ -1,0 +1,9 @@
+.form__text {
+    color: var(--cor-primaria-texto);
+    font-family: inherit;
+    display: inline-block;
+    width: 60%;
+    max-width: 300px;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}

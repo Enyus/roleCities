@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
+
 import styles from '../styles/Inputs.module.css'
+
 import { validateEmail } from '../utils/validateEmail';
+import { validateNome } from '../utils/validateNome';
+import { validatePassword } from '../utils/validatePassword';
+import { validateConfirmaPassword } from '../utils/validateConfirmaPassword'
 
 function Input(props) {
 
@@ -26,9 +31,22 @@ function Input(props) {
   function validateInput(event) {
     let value = event.target.value;
 
-    switch (props.type) {
+    switch (props.id) {
       case 'email':
         validateEmail(value) ? setValidated('2') : setValidated('1');
+        props.parentCallback(validateEmail(value));
+        break;
+      case 'nome':
+        validateNome(value) ? setValidated('2') : setValidated('1');
+        props.parentCallback(validateNome(value));
+        break;
+      case 'password':
+        validatePassword(value) ? setValidated('2') : setValidated('1');
+        props.parentCallback(validatePassword(value));
+        break;
+      case 'confirma-password':
+        validateConfirmaPassword(value) ? setValidated('2') : setValidated('1');
+        props.parentCallback(validateConfirmaPassword(value));
         break;
       default:
         setValidated('');
