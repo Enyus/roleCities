@@ -17,6 +17,7 @@ function Home(props) {
 
   if (!cadastro) {
     formARenderizar = (
+
       <div className={styles.formulario}>
         <FormLogin />
         <p className={styles.texto__padrao}>Não possui cadastro?</p>
