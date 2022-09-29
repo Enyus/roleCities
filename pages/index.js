@@ -4,26 +4,31 @@ import Input from '../components/input'
 import Button from '../components/button'
 import React, { useState } from 'react';
 import FormCriarUsuario from '../components/formCriarUsuario';
+import FormLogin from '../components/formLogin';
 
 function Home(props) {
   const [cadastro, setCadastro] = useState(false);
+
+  const checkCadastro = (childData) => {
+    setCadastro(childData);
+  }
 
   let formARenderizar
 
   if (!cadastro) {
     formARenderizar = (
-      <form className={styles.formulario}>
-        <Input label="Login" type="email" id="email" placeholder="nome@email.com" />
-        <Input label="Senha" type="password" id="password" placeholder="******" />
-        <Button type="submit" id="login" content="Entrar" />
+      <div className={styles.formulario}>
+        <FormLogin />
         <p className={styles.texto__padrao}>Não possui cadastro?</p>
         <button className={styles.texto__link} onClick={() => {setCadastro(true)}}>Faça Aqui</button>
-      </form>
+      </div>
     )
   } else {
     formARenderizar = (
       <div className={styles.formulario}>
-        <FormCriarUsuario />
+        <FormCriarUsuario 
+          parentCallback={checkCadastro}
+        />
         <button className={styles.voltar} onClick={() => setCadastro(false)}>
           <img src='/voltar.png' className={styles.voltar__img}/>
         </button>

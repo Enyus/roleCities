@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import Input from '../components/input';
 import Button from '../components/button';
 
@@ -28,6 +29,8 @@ export default function FormCriarUsuario(props) {
         });
 
         const result = await res.json();
+        
+        props.parentCallback(false);
     };
 
     const checkEmailValidation = (childData) => {
