@@ -1,51 +1,39 @@
-import * as dotenv from 'dotenv';
-dotenv.config()
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Input from '../components/input'
 import Button from '../components/button'
-import { createClient } from '@supabase/supabase-js'
 import React, { useState } from 'react';
-
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
-
-// const supabaseClient = createClient(SUPABASE_URL,SUPABASE_ANON_KEY)
-
-// supabaseClient
-//   .from('users')
-//   .select('*')
-//   .then((dados) => {
-//     console.log(dados)
-//   });
+import FormCriarUsuario from '../components/formCriarUsuario';
+import FormLogin from '../components/formLogin';
 
 function Home(props) {
   const [cadastro, setCadastro] = useState(false);
+
+  const checkCadastro = (childData) => {
+    setCadastro(childData);
+  }
 
   let formARenderizar
 
   if (!cadastro) {
     formARenderizar = (
-      <form className={styles.formulario} method="GET" action='/principal'>
-        <Input label="Login" type="email" id="email" placeholder="nome@email.com" />
-        <Input label="Senha" type="password" id="password" placeholder="******" />
-        <Button type="submit" id="login" content="Entrar" />
+
+      <div className={styles.formulario}>
+        <FormLogin />
         <p className={styles.texto__padrao}>Não possui cadastro?</p>
         <button className={styles.texto__link} onClick={() => {setCadastro(true)}}>Faça Aqui</button>
-      </form>
+      </div>
     )
   } else {
     formARenderizar = (
-      <form className={styles.formulario} method="POST">
-        <Input label="E-mail" type="email" id="email" placeholder="nome@email.com" />
-        <Input label="Nome do Personagem" type="text" id="nome" placeholder="Gandalf" />
-        <Input label="Senha" type="password" id="password" placeholder="******" />
-        <Input label="Confirma Senha" type="password" id="confirma-password" placeholder="******" />
-        <Button type="submit" id="cadastrar" content="Cadastrar" />
+      <div className={styles.formulario}>
+        <FormCriarUsuario 
+          parentCallback={checkCadastro}
+        />
         <button className={styles.voltar} onClick={() => setCadastro(false)}>
           <img src='/voltar.png' className={styles.voltar__img}/>
         </button>
-      </form>
+      </div>
     )
   }
 

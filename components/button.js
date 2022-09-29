@@ -1,14 +1,30 @@
 import React from 'react'
 import styles from '../styles/Inputs.module.css'
 
-class Button extends React.Component {
-  render() {
-    return (
-    <div className={styles.input__container}>
-        <button type={this.props.type} id={this.props.id} className={styles.button__submit}>{this.props.content}</button>
-    </div>
-    )
+function Button(props) {
+  let esltiloAplicadoDiv
+  let esltiloAplicadoBotao
+
+  switch (props.largura) {
+    case '1':
+      esltiloAplicadoDiv = styles.input__container + ' ' + styles.coluna__unica;
+      esltiloAplicadoBotao = styles.button__submit + ' ' + styles.botao__largo
+      break;
+    case '2':
+      esltiloAplicadoDiv = styles.input__container + ' ' + styles.coluna__dupla;
+      esltiloAplicadoBotao = styles.button__submit + ' ' + styles.botao__largo
+      break;
+    default:
+      esltiloAplicadoDiv = styles.input__container + ' ' + styles.input__margin;
+      esltiloAplicadoBotao = styles.button__submit + ' ' + styles.botao__curto
   }
+
+  return (
+    <div className={esltiloAplicadoDiv}>
+      <button type={props.type} id={props.id} className={esltiloAplicadoBotao} disabled={props.disabled}>{props.content}</button>
+    </div>
+  )
+
 }
 
 export default Button;
