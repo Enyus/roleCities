@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import Head from 'next/head';
 import Display from '../components/Display';
-import Button from '../components/Button';
+import Botao from '../components/Botao';
 
 import styles from '../styles/Principal.module.css';
 
