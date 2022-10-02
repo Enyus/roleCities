@@ -1,10 +1,19 @@
 import { supabase } from "../../utils/supaBaseClient";
 import * as bcrypt from 'bcrypt';
+import checkForDataBaseDuplication from "../../utils/checkForDataBaseDuplication";
 
 export default async function registrarUsuario(req, res) {
     const { email, nome, password } = req.body;
 
     const hash = bcrypt.hashSync(password, 10);
+
+    const emailDuplicado = await checkForDataBaseDuplication(email);
+
+    console.log(emailDuplicado);
+
+    if(emailDuplicado) {
+        return res.status(400).json({error: 'Usuário já cadastrado'})
+    }
 
     let { data, error } = await supabase
         .from('usuarios')

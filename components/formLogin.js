@@ -11,9 +11,10 @@ export default function FormLogin(props) {
     let [validated, setValidated] = useState(false);
     let [emailValidated, setEmailValidated] = useState(false);
     let [passwordValidated, setPasswordValidated] = useState(false);
+    let [databaseValidation, setDatabaseValidation] = useState({ error: '' })
 
     const router = useRouter();
-    
+
     const checkEmailValidation = (childData) => {
         setEmailValidated(childData);
     };
@@ -45,13 +46,23 @@ export default function FormLogin(props) {
         });
 
         const result = await res.json();
-        
+
+        // console.log(result)
+
+        if (result.error) {
+            setDatabaseValidation({ error: result.error });
+            return
+        }
+
         router.push('/principal')
     };
 
+    let error = databaseValidation.error;
 
     return (
         <form onSubmit={logarUsuario} onClick={checkValidation}>
+
+            <p className={styles.erro}>{error}</p>
 
             <Input
                 label="Login"
