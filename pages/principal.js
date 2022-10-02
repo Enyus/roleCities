@@ -32,8 +32,8 @@ function Principal(props) {
             <Display id='tamanho' titulo='Tamanho' content='1' largura='1'/>
             <Display id='producao' titulo='Produção' content='1' largura='1'/>
             <Display id='recursos' titulo='Recursos' content='1' largura='1'/>
-            <Button type="button" id="acoes" content="Ações" largura='2' loading={loading} />
-            <Button type="button" id="logs" content="Logs" largura='2' loading={loading}/>
+            <Botao type="button" id="acoes" content="Ações" largura='2' loading={loading} />
+            <Botao type="button" id="logs" content="Logs" largura='2' loading={loading}/>
           </div>
           <div className={styles.principal}>Tela principal</div>
         </div>
