@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import Input from '../components/input';
-import Button from '../components/button';
+import EntradaUsuario from './EntradaUsuario';
+import Botao from './Botao';
 
 import styles from '../styles/Forms.module.css'
 
@@ -13,9 +13,12 @@ export default function FormCriarUsuario(props) {
     let [passwordValidated, setPasswordValidated] = useState(false);
     let [confirmaPasswordValidated, setConfirmaPasswordValidated] = useState(false);
     let [databaseValidation, setDatabaseValidation] = useState({ error: '' })
+    let [loading, setLoading] = useState(false)
 
     const registerUser = async (event) => {
         event.preventDefault();
+
+        setLoading(true);
 
         const res = await fetch("/api/registrarUsuario", {
             body: JSON.stringify({
@@ -30,14 +33,16 @@ export default function FormCriarUsuario(props) {
         });
 
         const result = await res.json();
-
-        console.log(result)
+        
+        // console.log(result)
+        
+        setLoading(false);
 
         if (result.error) {
             setDatabaseValidation({ error: result.error });
             return
         }
-        
+
         props.parentCallback(false);
     };
 
@@ -78,15 +83,16 @@ export default function FormCriarUsuario(props) {
                 Após preencher todos os campos, clique em qualquer lugar do formulário para conferir a validação.
             </p>
 
-            <Input
+            <EntradaUsuario
                 label="E-mail"
                 type="email"
                 id="email"
                 placeholder="nome@email.com"
                 parentCallback={checkEmailValidation}
+                loading={loading}
             />
 
-            <Input
+            <EntradaUsuario
                 label="Nome do Personagem"
                 type="text"
                 id="nome"
@@ -94,7 +100,7 @@ export default function FormCriarUsuario(props) {
                 parentCallback={checkNomeValidation}
             />
 
-            <Input
+            <EntradaUsuario
                 label="Senha"
                 type="password"
                 id="password"
@@ -102,7 +108,7 @@ export default function FormCriarUsuario(props) {
                 parentCallback={checkPasswordValidation}
             />
 
-            <Input
+            <EntradaUsuario
                 label="Confirma Senha"
                 type="password"
                 id="confirma-password"
@@ -110,11 +116,12 @@ export default function FormCriarUsuario(props) {
                 parentCallback={checkConfirmaPasswordValidation}
             />
 
-            <Button
+            <Botao
                 type="submit"
                 id="cadastrar"
                 content="Cadastrar"
                 disabled={!validated}
+                loading={loading}
             />
         </form >
     )

@@ -1,10 +1,9 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import Input from '../components/input'
-import Button from '../components/button'
 import React, { useState } from 'react';
+import Head from 'next/head';
 import FormCriarUsuario from '../components/formCriarUsuario';
 import FormLogin from '../components/formLogin';
+
+import styles from '../styles/Home.module.css';
 
 function Home(props) {
   const [cadastro, setCadastro] = useState(false);

@@ -10,13 +10,15 @@
 }
 
 .display__conteudo {
-    margin: 0 0.2rem;
+    margin: 0 auto;
     font-size: 1rem;
     text-align: center;
     color: var(--cor-secundaria-texto);
     background-color: var(--cor-bordas);
     border: 0.2rem solid var(--cor-primaria-texto);
     border-radius: 1rem;
+    width: 90%;
+    max-width: 250px;
 }
 
 .coluna__unica {

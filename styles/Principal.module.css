@@ -52,6 +52,9 @@
     text-align: center;
     border: solid 0.3rem var(--cor-primaria-texto);
     border-radius: 0.5rem;
+    background-image: url('/ilha.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 @media screen and (max-width: 415px) {

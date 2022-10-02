@@ -1,9 +1,14 @@
+import { useState } from 'react';
+
 import Head from 'next/head';
-import Display from '../components/display';
-import Button from '../components/button'
+import Display from '../components/Display';
+import Button from '../components/Button';
+
 import styles from '../styles/Principal.module.css';
 
 function Principal(props) {
+  let [loading, setLoading] = useState(false);
+
   return (
     <div className={styles.container__principal}>
       <Head>
@@ -27,8 +32,8 @@ function Principal(props) {
             <Display id='tamanho' titulo='Tamanho' content='1' largura='1'/>
             <Display id='producao' titulo='Produção' content='1' largura='1'/>
             <Display id='recursos' titulo='Recursos' content='1' largura='1'/>
-            <Button type="button" id="acoes" content="Ações" largura='2' />
-            <Button type="button" id="logs" content="Logs" largura='2' />
+            <Button type="button" id="acoes" content="Ações" largura='2' loading={loading} />
+            <Button type="button" id="logs" content="Logs" largura='2' loading={loading}/>
           </div>
           <div className={styles.principal}>Tela principal</div>
         </div>

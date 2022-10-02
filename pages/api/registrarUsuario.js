@@ -9,7 +9,7 @@ export default async function registrarUsuario(req, res) {
 
     const emailDuplicado = await checkForDataBaseDuplication(email);
 
-    console.log(emailDuplicado);
+    // console.log(emailDuplicado);
 
     if(emailDuplicado) {
         return res.status(400).json({error: 'Usuário já cadastrado'})

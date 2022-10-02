@@ -7,9 +7,9 @@ export default async function checkForDataBaseDuplication(email) {
         .select('*')
         .eq('email', email);
 
-    console.log(data);
-    console.log(data.length);
-    console.log(data.length < 1);
+    // console.log(data);
+    // console.log(data.length);
+    // console.log(data.length < 1);
 
     if (data.length < 1) {
         return false
