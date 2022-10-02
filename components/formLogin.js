@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router'
 
-import Input from '../components/input';
-import Button from '../components/button';
+import EntradaUsuario from './EntradaUsuario';
+import Botao from './Botao';
 
 import styles from '../styles/Forms.module.css'
 
@@ -12,6 +12,7 @@ export default function FormLogin(props) {
     let [emailValidated, setEmailValidated] = useState(false);
     let [passwordValidated, setPasswordValidated] = useState(false);
     let [databaseValidation, setDatabaseValidation] = useState({ error: '' })
+    let [loading, setLoading] = useState(false)
 
     const router = useRouter();
 
@@ -34,6 +35,8 @@ export default function FormLogin(props) {
     const logarUsuario = async (event) => {
         event.preventDefault();
 
+        setLoading(true);
+
         const res = await fetch("/api/logarUsuario", {
             body: JSON.stringify({
                 email: event.target.email.value,
@@ -48,6 +51,8 @@ export default function FormLogin(props) {
         const result = await res.json();
 
         // console.log(result)
+        
+        setLoading(false);
 
         if (result.error) {
             setDatabaseValidation({ error: result.error });
@@ -64,7 +69,7 @@ export default function FormLogin(props) {
 
             <p className={styles.erro}>{error}</p>
 
-            <Input
+            <EntradaUsuario
                 label="Login"
                 type="email"
                 id="email"
@@ -72,7 +77,7 @@ export default function FormLogin(props) {
                 parentCallback={checkEmailValidation}
             />
 
-            <Input
+            <EntradaUsuario
                 label="Senha"
                 type="password"
                 id="password"
@@ -80,11 +85,12 @@ export default function FormLogin(props) {
                 parentCallback={checkPasswordValidation}
             />
 
-            <Button
+            <Botao
                 type="submit"
                 id="login"
                 content="Entrar"
                 disabled={!validated}
+                loading={loading}
             />
 
         </form>

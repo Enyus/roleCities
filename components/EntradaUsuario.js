@@ -7,7 +7,7 @@ import { validateNome } from '../utils/validateNome';
 import { validatePassword } from '../utils/validatePassword';
 import { validateConfirmaPassword } from '../utils/validateConfirmaPassword'
 
-function Input(props) {
+function EntradaUsuario(props) {
 
   const [validated, setValidated] = useState('');
   // '' para não checado;
@@ -76,4 +76,4 @@ function Input(props) {
   )
 }
 
-export default Input;
+export default EntradaUsuario;

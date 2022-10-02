@@ -1,7 +1,10 @@
-import React from 'react'
-import styles from '../styles/Inputs.module.css'
+import React from 'react';
 
-function Button(props) {
+import { FaSpinner } from 'react-icons/fa';
+
+import styles from '../styles/Inputs.module.css';
+
+function Botao(props) {
   let esltiloAplicadoDiv
   let esltiloAplicadoBotao
 
@@ -19,6 +22,18 @@ function Button(props) {
       esltiloAplicadoBotao = styles.button__submit + ' ' + styles.botao__curto
   }
 
+  if (props.loading) {
+    return (
+      <div className={esltiloAplicadoDiv}>
+        <button type='button' className={esltiloAplicadoBotao} disabled>
+          <div className={styles.iconeLoading}>
+            <FaSpinner />
+          </div>
+        </button>
+      </div>
+    )
+  }
+
   return (
     <div className={esltiloAplicadoDiv}>
       <button type={props.type} id={props.id} className={esltiloAplicadoBotao} disabled={props.disabled}>{props.content}</button>
@@ -27,4 +42,4 @@ function Button(props) {
 
 }
 
-export default Button;
+export default Botao;
