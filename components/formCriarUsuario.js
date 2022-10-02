@@ -12,6 +12,7 @@ export default function FormCriarUsuario(props) {
     let [nomeValidated, setNomeValidated] = useState(false);
     let [passwordValidated, setPasswordValidated] = useState(false);
     let [confirmaPasswordValidated, setConfirmaPasswordValidated] = useState(false);
+    let [databaseValidation, setDatabaseValidation] = useState({ error: '' })
 
     const registerUser = async (event) => {
         event.preventDefault();
@@ -29,6 +30,13 @@ export default function FormCriarUsuario(props) {
         });
 
         const result = await res.json();
+
+        console.log(result)
+
+        if (result.error) {
+            setDatabaseValidation({ error: result.error });
+            return
+        }
         
         props.parentCallback(false);
     };
@@ -57,8 +65,13 @@ export default function FormCriarUsuario(props) {
         }
     };
 
+    let error = databaseValidation.error;
+
     return (
         <form onSubmit={registerUser} onClick={checkValidation}>
+            
+            <p className={styles.erro}>{error}</p>
+            
             <p
                 className={styles.form__text}
             >
