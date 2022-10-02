@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import FormCriarUsuario from '../components/formCriarUsuario';
-import FormLogin from '../components/formLogin';
+import FormCriarUsuario from '../components/FormCriarUsuario';
+import FormLogin from '../components/FormLogin';
 
 import styles from '../styles/Home.module.css';
 
