@@ -51,7 +51,25 @@ export default function FormLogin(props) {
         const result = await res.json();
 
         // console.log(result)
-        
+
+        const email = {
+            receiver: 'enyus@hotmail.com',
+            subject: 'Teste do Sengrid',
+            text: 'Testando essa bagaça'
+        }
+
+        try {
+            await fetch("/api/mandarEmail", {
+                "method": "POST",
+                "headers": { "content-type": "application/json" },
+                "body": JSON.stringify(email)
+            })
+
+            console.log('mensagem enviada');
+        } catch (error) {
+            console.log(error);
+        }
+
         setLoading(false);
 
         if (result.error) {
