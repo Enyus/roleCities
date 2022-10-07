@@ -33,6 +33,24 @@
     text-align: center;
 }
 
+.ajustar__icone {
+    animation: rodacelular 2s infinite;
+}
+
+@keyframes rodacelular {
+    0% {
+        transform: rotate(45deg);
+    }
+
+    50% {
+        transform: rotate(-45deg);
+    }
+
+    100% {
+        transform: rotate(45deg);
+    }
+}
+
 .container__secundario {
     display: flex;
     width: 100%;
@@ -52,7 +70,7 @@
     text-align: center;
     border: solid 0.3rem var(--cor-primaria-texto);
     border-radius: 0.5rem;
-    background-image: url('/ilha.jpg');
+    background-image: url('/regioes/ilha.jpg');
     background-size: cover;
     background-position: center;
 }

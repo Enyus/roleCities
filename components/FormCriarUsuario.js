@@ -7,13 +7,13 @@ import styles from '../styles/Forms.module.css'
 
 export default function FormCriarUsuario(props) {
 
-    let [validated, setValidated] = useState(false);
-    let [emailValidated, setEmailValidated] = useState(false);
-    let [nomeValidated, setNomeValidated] = useState(false);
-    let [passwordValidated, setPasswordValidated] = useState(false);
-    let [confirmaPasswordValidated, setConfirmaPasswordValidated] = useState(false);
-    let [databaseValidation, setDatabaseValidation] = useState({ error: '' })
-    let [loading, setLoading] = useState(false)
+    const [validated, setValidated] = useState(false);
+    const [emailValidated, setEmailValidated] = useState(false);
+    const [nomeValidated, setNomeValidated] = useState(false);
+    const [passwordValidated, setPasswordValidated] = useState(false);
+    const [confirmaPasswordValidated, setConfirmaPasswordValidated] = useState(false);
+    const [databaseValidation, setDatabaseValidation] = useState({ error: '' })
+    const [loading, setLoading] = useState(false)
 
     const registerUser = async (event) => {
         event.preventDefault();

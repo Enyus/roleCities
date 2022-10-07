@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Head from 'next/head';
 import Display from '../components/Display';
@@ -7,7 +7,38 @@ import Botao from '../components/Botao';
 import styles from '../styles/Principal.module.css';
 
 function Principal(props) {
-  let [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [regiao, setRegiao] = useState({
+    img: '',
+    nome: ''
+  })
+
+
+  const buscarRegiao = async () => {
+
+    const res = await fetch("/api/buscarRegiao", {
+      body: JSON.stringify({
+        id: 'd130a370-d862-4616-905a-97f10d9cbdfa',
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+
+    const result = await res.json();
+
+    // console.log(result);
+    // console.log(result.data[0])
+
+    setRegiao({
+      img: result.data[0].img,
+      nome: result.data[0].nome
+    })
+  }
+
+  buscarRegiao();
+
 
   return (
     <div className={styles.container__principal}>
@@ -18,25 +49,54 @@ function Principal(props) {
       </Head>
 
       <main className={styles.main}>
+
         <h1 className={styles.titulo__principal}>RoleCities</h1>
+
         <div className={styles.ajustar__tela}>
           <p>Rotacionais teu aperalho celultar</p>
-          <img src='/rotatephone.png' />
+          <img src='/icons/rotatephone.png' className={styles.ajustar__icone} />
           <p>nobre aventureiro</p>
         </div>
+
         <div className={styles.container__secundario}>
+
+          <Botao
+            type='voltar'
+            onClick={() => window.history.back()}
+            hover={true}
+          />
+
           <div className={styles.menu}>
-            <Display id='cidade' titulo='Cidade' content='Jima Island' largura='2'/>
-            <Display id='turno' titulo='Turno' content='1' largura='1'/>
-            <Display id='status' titulo='Status' content='ok' largura='1'/>
-            <Display id='tamanho' titulo='Tamanho' content='1' largura='1'/>
-            <Display id='producao' titulo='Produção' content='1' largura='1'/>
-            <Display id='recursos' titulo='Recursos' content='1' largura='1'/>
+            <Display
+              id='cidade'
+              titulo='Região'
+              content={loading ? '' : regiao.nome}
+              largura='2'
+            />
+
+            <Display id='turno' titulo='Turno' content='1' largura='1' />
+
+            <Display id='status' titulo='Status' content='ok' largura='1' />
+
+            <Display id='tamanho' titulo='Tamanho' content='1' largura='1' />
+
+            <Display id='producao' titulo='Produção' content='1' largura='1' />
+
+            <Display id='recursos' titulo='Recursos' content='1' largura='1' />
+
             <Botao type="button" id="acoes" content="Ações" largura='2' loading={loading} />
-            <Botao type="button" id="logs" content="Logs" largura='2' loading={loading}/>
+
+            <Botao type="button" id="logs" content="Logs" largura='2' loading={loading} />
           </div>
-          <div className={styles.principal}>Tela principal</div>
+
+          <div
+            className={loading ? styles.principal : styles.principal + ' '}
+          >
+            Tela principal
+          </div>
+
         </div>
+
       </main>
     </div>
   )

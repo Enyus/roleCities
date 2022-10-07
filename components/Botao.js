@@ -22,6 +22,7 @@ function Botao(props) {
       esltiloAplicadoBotao = styles.button__submit + ' ' + styles.botao__curto
   }
 
+
   if (props.loading) {
     return (
       <div className={esltiloAplicadoDiv}>
@@ -31,6 +32,22 @@ function Botao(props) {
           </div>
         </button>
       </div>
+    )
+  }
+
+  if (props.type == 'voltar') {
+    return (
+      <button
+        className={props.hover ? styles.voltar + ' ' + styles.voltar__hover : styles.voltar}
+        onClick={props.onClick}
+      >
+
+        <img
+          src='/icons/voltar.png'
+          className={styles.voltar__img}
+        />
+
+      </button>
     )
   }
 

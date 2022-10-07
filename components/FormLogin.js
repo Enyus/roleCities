@@ -8,11 +8,11 @@ import styles from '../styles/Forms.module.css'
 
 export default function FormLogin(props) {
 
-    let [validated, setValidated] = useState(false);
-    let [emailValidated, setEmailValidated] = useState(false);
-    let [passwordValidated, setPasswordValidated] = useState(false);
-    let [databaseValidation, setDatabaseValidation] = useState({ error: '' })
-    let [loading, setLoading] = useState(false)
+    const [validated, setValidated] = useState(false);
+    const [emailValidated, setEmailValidated] = useState(false);
+    const [passwordValidated, setPasswordValidated] = useState(false);
+    const [databaseValidation, setDatabaseValidation] = useState({ error: '' })
+    const [loading, setLoading] = useState(false)
 
     const router = useRouter();
 
@@ -52,23 +52,23 @@ export default function FormLogin(props) {
 
         // console.log(result)
 
-        const email = {
-            receiver: 'enyus@hotmail.com',
-            subject: 'Teste do Sengrid',
-            text: 'Testando essa bagaça'
-        }
+        // const email = {
+        //     receiver: 'enyus@hotmail.com',
+        //     subject: 'Teste do Sengrid',
+        //     text: 'Testando essa bagaça'
+        // }
 
-        try {
-            await fetch("/api/mandarEmail", {
-                "method": "POST",
-                "headers": { "content-type": "application/json" },
-                "body": JSON.stringify(email)
-            })
+        // try {
+        //     await fetch("/api/mandarEmail", {
+        //         "method": "POST",
+        //         "headers": { "content-type": "application/json" },
+        //         "body": JSON.stringify(email)
+        //     })
 
-            console.log('mensagem enviada');
-        } catch (error) {
-            console.log(error);
-        }
+        //     console.log('mensagem enviada');
+        // } catch (error) {
+        //     console.log(error);
+        // }
 
         setLoading(false);
 
