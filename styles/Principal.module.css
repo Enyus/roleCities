@@ -70,7 +70,6 @@
     text-align: center;
     border: solid 0.3rem var(--cor-primaria-texto);
     border-radius: 0.5rem;
-    background-image: url('/regioes/ilha.jpg');
     background-size: cover;
     background-position: center;
 }

@@ -13,31 +13,36 @@ function Principal(props) {
     nome: ''
   })
 
+  useEffect(() => {
 
-  const buscarRegiao = async () => {
+    const buscarRegiao = async () => {
+  
+      const res = await fetch("/api/buscarRegiao", {
+        body: JSON.stringify({
+          id: 'd130a370-d862-4616-905a-97f10d9cbdfa',
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
+  
+      const result = await res.json();
+  
+      // console.log(result);
+      // console.log(result.data[0])
+  
+      setRegiao({
+        img: result.data[0].img,
+        nome: result.data[0].nome
+      })
+    }
+    
+    buscarRegiao();
 
-    const res = await fetch("/api/buscarRegiao", {
-      body: JSON.stringify({
-        id: 'd130a370-d862-4616-905a-97f10d9cbdfa',
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-    });
+    setLoading(false);
 
-    const result = await res.json();
-
-    // console.log(result);
-    // console.log(result.data[0])
-
-    setRegiao({
-      img: result.data[0].img,
-      nome: result.data[0].nome
-    })
-  }
-
-  buscarRegiao();
+  }, [])
 
 
   return (
@@ -90,7 +95,8 @@ function Principal(props) {
           </div>
 
           <div
-            className={loading ? styles.principal : styles.principal + ' '}
+            className={styles.principal}
+            style={loading ? {backgroundImage: 'none'} : {backgroundImage: `url(${regiao.img})`} }
           >
             Tela principal
           </div>
