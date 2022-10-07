@@ -8,11 +8,11 @@ import styles from '../styles/Forms.module.css'
 
 export default function FormLogin(props) {
 
-    let [validated, setValidated] = useState(false);
-    let [emailValidated, setEmailValidated] = useState(false);
-    let [passwordValidated, setPasswordValidated] = useState(false);
-    let [databaseValidation, setDatabaseValidation] = useState({ error: '' })
-    let [loading, setLoading] = useState(false)
+    const [validated, setValidated] = useState(false);
+    const [emailValidated, setEmailValidated] = useState(false);
+    const [passwordValidated, setPasswordValidated] = useState(false);
+    const [databaseValidation, setDatabaseValidation] = useState({ error: '' })
+    const [loading, setLoading] = useState(false)
 
     const router = useRouter();
 
@@ -51,7 +51,7 @@ export default function FormLogin(props) {
         const result = await res.json();
 
         // console.log(result)
-        
+
         setLoading(false);
 
         if (result.error) {

@@ -7,13 +7,13 @@ import styles from '../styles/Forms.module.css'
 
 export default function FormCriarUsuario(props) {
 
-    let [validated, setValidated] = useState(false);
-    let [emailValidated, setEmailValidated] = useState(false);
-    let [nomeValidated, setNomeValidated] = useState(false);
-    let [passwordValidated, setPasswordValidated] = useState(false);
-    let [confirmaPasswordValidated, setConfirmaPasswordValidated] = useState(false);
-    let [databaseValidation, setDatabaseValidation] = useState({ error: '' })
-    let [loading, setLoading] = useState(false)
+    const [validated, setValidated] = useState(false);
+    const [emailValidated, setEmailValidated] = useState(false);
+    const [nomeValidated, setNomeValidated] = useState(false);
+    const [passwordValidated, setPasswordValidated] = useState(false);
+    const [confirmaPasswordValidated, setConfirmaPasswordValidated] = useState(false);
+    const [databaseValidation, setDatabaseValidation] = useState({ error: '' })
+    const [loading, setLoading] = useState(false)
 
     const registerUser = async (event) => {
         event.preventDefault();
@@ -35,6 +35,24 @@ export default function FormCriarUsuario(props) {
         const result = await res.json();
         
         // console.log(result)
+
+        const emailEnviado = {
+            receiver: result.data[0].email,
+            subject: 'Bem vindo ao RoleCities',
+            text: 'Seja bem vindo ao RoleCities. Você foi cadastrado como um usuário observador. Para ter seu personagem associado a uma cidade, converse com o Cássio.'
+        }
+
+        try {
+            await fetch("/api/mandarEmail", {
+                "method": "POST",
+                "headers": { "content-type": "application/json" },
+                "body": JSON.stringify(emailEnviado)
+            })
+
+            // console.log('mensagem enviada');
+        } catch (error) {
+            console.log(error);
+        }
         
         setLoading(false);
 

@@ -41,15 +41,6 @@
   background: none;
 }
 
-.voltar {
-  background: none;
-  border: none;
-}
-
-.voltar__img {
-  height: 3rem;
-}
-
 @media screen and (min-width: 768px) {
   .titulo__principal {
     justify-self: flex-start;
