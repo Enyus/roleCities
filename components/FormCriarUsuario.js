@@ -35,6 +35,24 @@ export default function FormCriarUsuario(props) {
         const result = await res.json();
         
         // console.log(result)
+
+        const emailEnviado = {
+            receiver: result.data[0].email,
+            subject: 'Bem vindo ao RoleCities',
+            text: 'Seja bem vindo ao RoleCities. Você foi cadastrado como um usuário observador. Para ter seu personagem associado a uma cidade, converse com o Cássio.'
+        }
+
+        try {
+            await fetch("/api/mandarEmail", {
+                "method": "POST",
+                "headers": { "content-type": "application/json" },
+                "body": JSON.stringify(emailEnviado)
+            })
+
+            // console.log('mensagem enviada');
+        } catch (error) {
+            console.log(error);
+        }
         
         setLoading(false);
 

@@ -10,11 +10,11 @@ export default async (req, res) => {
     subject,
     text,
   };
-  console.log(msg)
+  // console.log(msg)
 
   try {
     await sgMail.send(msg);
-    console.log(`Email has been sent`)
+    // console.log(`Email has been sent`)
     res.json({ message: `Email has been sent` })
   } catch (error) {
     console.log('Error sending email')
