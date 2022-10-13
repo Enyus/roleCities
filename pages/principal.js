@@ -58,7 +58,7 @@ function Principal(props) {
         <h1 className={styles.titulo__principal}>RoleCities</h1>
 
         <div className={styles.ajustar__tela}>
-          <p>Rotacionais teu aperalho celultar</p>
+          <p>Rotacionais teu aperalho celular</p>
           <img src='/icons/rotatephone.png' className={styles.ajustar__icone} />
           <p>nobre aventureiro</p>
         </div>
