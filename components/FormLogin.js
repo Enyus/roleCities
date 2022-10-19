@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useRouter } from 'next/router'
+import { UserContext } from "../pages/_app";
 
 import EntradaUsuario from './EntradaUsuario';
 import Botao from './Botao';
@@ -7,7 +8,7 @@ import Botao from './Botao';
 import styles from '../styles/Forms.module.css'
 
 export default function FormLogin(props) {
-
+    const {setUser} = useContext(UserContext);
     const [validated, setValidated] = useState(false);
     const [emailValidated, setEmailValidated] = useState(false);
     const [passwordValidated, setPasswordValidated] = useState(false);
@@ -50,14 +51,15 @@ export default function FormLogin(props) {
 
         const result = await res.json();
 
-        // console.log(result)
-
-        setLoading(false);
-
+        // console.log(result);
+        setUser(result.data[0].personagem)
+        
         if (result.error) {
             setDatabaseValidation({ error: result.error });
             return
         }
+        
+        setLoading(false);
 
         router.push('/principal')
     };
