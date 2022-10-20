@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import Botao from "./Botao";
 import Display from "./Display";
 
-import styles from '../styles/PaginaPrincipal.module.css'
+import styles from "../styles/PaginaPrincipal.module.css";
+import Grid from "./Grid";
 
 function PaginaPrincipal(props) {
   const [loading, setLoading] = useState(true);
@@ -12,7 +13,6 @@ function PaginaPrincipal(props) {
     nome: "",
   });
 
-  
   useEffect(() => {
     const buscarRegiao = async () => {
       const res = await fetch("/api/buscarRegiao", {
@@ -40,7 +40,6 @@ function PaginaPrincipal(props) {
 
     setLoading(false);
   }, []);
-
 
   return (
     <>
@@ -91,12 +90,12 @@ function PaginaPrincipal(props) {
         <div
           className={styles.principal}
           style={
-            loading
+            props.loading
               ? { backgroundImage: "none" }
               : { backgroundImage: `url(${regiao.img})` }
           }
         >
-          Tela principal
+          <Grid />
         </div>
       </div>
     </>

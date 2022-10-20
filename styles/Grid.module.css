@@ -1,0 +1,11 @@
+.hexagono {
+    fill: lightgray;
+    fill-opacity: 10%;
+    stroke: lightgray;
+    stroke-width: .2;
+    cursor: pointer;
+}
+
+.hexagono:hover {
+    fill-opacity: 60%;
+}
