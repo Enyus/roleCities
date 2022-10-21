@@ -1,11 +1,15 @@
-.hexagono {
-    fill: lightgray;
-    fill-opacity: 10%;
-    stroke: lightgray;
-    stroke-width: .2;
-    cursor: pointer;
+.imagem__regiao {
+    width: 100%;
+    border: solid 0.3rem var(--cor-primaria-texto);
+    border-radius: 0.5rem;
+    z-index: 0;
 }
 
-.hexagono:hover {
-    fill-opacity: 60%;
+.imagem__cidade {
+    position: relative;
+    top: -43%;
+    left: 55%;
+    width: 10%;
+    border: solid 2px red;
+    z-index: 1;
 }

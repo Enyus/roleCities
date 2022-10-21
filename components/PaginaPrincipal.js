@@ -87,15 +87,8 @@ function PaginaPrincipal(props) {
           />
         </div>
 
-        <div
-          className={styles.principal}
-          style={
-            props.loading
-              ? { backgroundImage: "none" }
-              : { backgroundImage: `url(${regiao.img})` }
-          }
-        >
-          <Grid />
+        <div className={styles.principal}>
+          <Grid regiao={regiao.img}/>
         </div>
       </div>
     </>
