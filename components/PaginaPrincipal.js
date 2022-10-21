@@ -12,6 +12,13 @@ function PaginaPrincipal(props) {
     img: "",
     nome: "",
   });
+  const [cidade, setCidade] = useState({
+    nome: "",
+    tamanho: 0,
+    recursos: 0,
+    producao: 0,
+    img: "",
+  });
 
   useEffect(() => {
     const buscarRegiao = async () => {
@@ -30,6 +37,14 @@ function PaginaPrincipal(props) {
       // console.log(result);
       // console.log(result.data[0])
 
+      setCidade({
+        nome: "",
+        tamanho: 0,
+        recursos: 0,
+        producao: 0,
+        img: "",
+      });
+
       setRegiao({
         img: result.data[0].img,
         nome: result.data[0].nome,
@@ -40,6 +55,53 @@ function PaginaPrincipal(props) {
 
     setLoading(false);
   }, []);
+
+  const buscarCidade = async () => {
+    setLoading(true);
+
+    const buscaCidade = await fetch("/api/buscarCidade", {
+      body: JSON.stringify({
+        id: "8b6af12d-a659-45a2-83df-887c0f71f4b7",
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+
+    const result = await buscaCidade.json();
+
+    setCidade({
+      nome: result.data[0].nome,
+      tamanho: result.data[0].tamanho,
+      recursos: result.data[0].recursos,
+      producao: result.data[0].producao,
+      img: result.data[0].img,
+    });
+
+    setRegiao({
+      img: "",
+      nome: "",
+    });
+
+    setLoading(false);
+  };
+
+  const handleShowCidade = (childData) => {
+    buscarCidade();
+  };
+
+  let tituloMostrado = "";
+  let nomeMostrado = "";
+
+  if (regiao.nome != "") {
+    tituloMostrado = "Região";
+    nomeMostrado = regiao.nome;
+  }
+  if (cidade.nome != "") {
+    tituloMostrado = "Cidade";
+    nomeMostrado = cidade.nome;
+  }
 
   return (
     <>
@@ -55,8 +117,8 @@ function PaginaPrincipal(props) {
         <div className={styles.menu}>
           <Display
             id="cidade"
-            titulo="Região"
-            content={loading ? "" : regiao.nome}
+            titulo={loading ? "" : tituloMostrado}
+            content={loading ? "" : nomeMostrado}
             largura="2"
           />
 
@@ -64,11 +126,30 @@ function PaginaPrincipal(props) {
 
           <Display id="status" titulo="Status" content="ok" largura="1" />
 
-          <Display id="tamanho" titulo="Tamanho" content="1" largura="1" />
-
-          <Display id="producao" titulo="Produção" content="1" largura="1" />
-
-          <Display id="recursos" titulo="Recursos" content="1" largura="1" />
+          {cidade.nome != "" ? (
+            <>
+              <Display 
+                id="tamanho" 
+                titulo="Tamanho" 
+                content={cidade.tamanho} 
+                largura="1" 
+              />
+              <Display
+                id="producao"
+                titulo="Produção"
+                content={cidade.producao}
+                largura="1"
+              />
+              <Display
+                id="recursos"
+                titulo="Recursos"
+                content={cidade.recursos}
+                largura="1"
+              />
+            </>
+          ) : (
+            ""
+          )}
 
           <Botao
             type="button"
@@ -88,7 +169,24 @@ function PaginaPrincipal(props) {
         </div>
 
         <div className={styles.principal}>
-          <Grid regiao={regiao.img}/>
+          {regiao.nome != "" ? (
+            <Grid
+              mostrar="regiao"
+              background={regiao.img}
+              parentCallback={handleShowCidade}
+            />
+          ) : (
+            ""
+          )}
+          {cidade.nome != "" ? (
+            <Grid
+              mostrar="cidade"
+              background={cidade.img}
+              parentCallback={handleShowCidade}
+            />
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </>
