@@ -53,7 +53,7 @@ function Botao(props) {
 
   return (
     <div className={esltiloAplicadoDiv}>
-      <button type={props.type} id={props.id} className={esltiloAplicadoBotao} disabled={props.disabled}>{props.content}</button>
+      <button type={props.type} id={props.id} onClick={props.onClick} className={esltiloAplicadoBotao} disabled={props.disabled}>{props.content}</button>
     </div>
   )
 

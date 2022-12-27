@@ -1,6 +1,7 @@
 .display__geral {
     width: 100%;
     text-align: center;
+    padding-bottom: 5px;
 }
 
 .display__titulo {

@@ -43,7 +43,6 @@
 
 .button__submit {
     color: var(--cor-primaria-texto);
-    font-size: 1.5rem;
     width: fit-content;
     max-width: 100%;
     font-family: inherit;
@@ -51,6 +50,7 @@
     border-radius: 15px;
     background-color: var(--cor-fundo-botao);
     padding: 0 1rem;
+    margin-bottom: 5px;
 }
 
 .button__submit:disabled {
@@ -99,5 +99,11 @@
 
     to {
         transform: rotate(-360deg);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .button__submit {
+        font-size: 1.5rem;
     }
 }

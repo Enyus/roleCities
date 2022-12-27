@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import Botao from "./Botao";
 import Display from "./Display";
 
-import styles from '../styles/PaginaPrincipal.module.css'
+import styles from "../styles/PaginaPrincipal.module.css";
+import Grid from "./Grid";
 
 function PaginaPrincipal(props) {
   const [loading, setLoading] = useState(true);
@@ -11,8 +12,15 @@ function PaginaPrincipal(props) {
     img: "",
     nome: "",
   });
+  const [cidade, setCidade] = useState({
+    nome: "",
+    tamanho: 0,
+    recursos: 0,
+    producao: 0,
+    img: "",
+  });
+  const [lugarMostrado, setLugarMostrado] = useState('regiao')
 
-  
   useEffect(() => {
     const buscarRegiao = async () => {
       const res = await fetch("/api/buscarRegiao", {
@@ -34,6 +42,7 @@ function PaginaPrincipal(props) {
         img: result.data[0].img,
         nome: result.data[0].nome,
       });
+
     };
 
     buscarRegiao();
@@ -41,6 +50,54 @@ function PaginaPrincipal(props) {
     setLoading(false);
   }, []);
 
+  const buscarCidade = async () => {
+    setLoading(true);
+
+    const buscaCidade = await fetch("/api/buscarCidade", {
+      body: JSON.stringify({
+        id: "8b6af12d-a659-45a2-83df-887c0f71f4b7",
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+
+    const result = await buscaCidade.json();
+
+    setCidade({
+      nome: result.data[0].nome,
+      tamanho: result.data[0].tamanho,
+      recursos: result.data[0].recursos,
+      producao: result.data[0].producao,
+      img: result.data[0].img,
+    });
+
+    setLugarMostrado('cidade');
+
+    setLoading(false);
+  };
+
+  const handleShowCidade = (childData) => {
+    buscarCidade();
+  };
+
+  const handleRetornarRegiao = (event) => {
+    console.log(lugarMostrado);
+    setLugarMostrado('regiao');
+  }
+
+  let tituloMostrado = "";
+  let nomeMostrado = "";
+
+  if (lugarMostrado == 'regiao') {
+    tituloMostrado = "Região";
+    nomeMostrado = regiao.nome;
+  }
+  if (lugarMostrado == 'cidade') {
+    tituloMostrado = "Cidade";
+    nomeMostrado = cidade.nome;
+  }
 
   return (
     <>
@@ -56,8 +113,8 @@ function PaginaPrincipal(props) {
         <div className={styles.menu}>
           <Display
             id="cidade"
-            titulo="Região"
-            content={loading ? "" : regiao.nome}
+            titulo={loading ? "" : tituloMostrado}
+            content={loading ? "" : nomeMostrado}
             largura="2"
           />
 
@@ -65,19 +122,50 @@ function PaginaPrincipal(props) {
 
           <Display id="status" titulo="Status" content="ok" largura="1" />
 
-          <Display id="tamanho" titulo="Tamanho" content="1" largura="1" />
+          {lugarMostrado == 'cidade' ? (
+            <>
+              <Display 
+                id="tamanho" 
+                titulo="Tamanho" 
+                content={cidade.tamanho} 
+                largura="1" 
+              />
 
-          <Display id="producao" titulo="Produção" content="1" largura="1" />
+              <Display
+                id="producao"
+                titulo="Produção"
+                content={cidade.producao}
+                largura="1"
+              />
 
-          <Display id="recursos" titulo="Recursos" content="1" largura="1" />
+              <Display
+                id="recursos"
+                titulo="Recursos"
+                content={cidade.recursos}
+                largura="1"
+              />
 
-          <Botao
-            type="button"
-            id="acoes"
-            content="Ações"
-            largura="2"
-            loading={loading}
-          />
+              <Botao
+                type="button"
+                id="retornaregiao"
+                content="Retornar"
+                largura="2"
+                loading={loading}
+                onClick={handleRetornarRegiao}
+              />
+
+              <Botao
+                type="button"
+                id="acoes"
+                content="Ações"
+                largura="2"
+                loading={loading}
+              />
+
+            </>
+          ) : (
+            ""
+          )}
 
           <Botao
             type="button"
@@ -88,15 +176,28 @@ function PaginaPrincipal(props) {
           />
         </div>
 
-        <div
-          className={styles.principal}
-          style={
-            loading
-              ? { backgroundImage: "none" }
-              : { backgroundImage: `url(${regiao.img})` }
-          }
-        >
-          Tela principal
+        <div className={styles.principal}>
+
+          {lugarMostrado == 'regiao' ? (
+            <Grid
+              mostrar="regiao"
+              background={regiao.img}
+              parentCallback={handleShowCidade}
+            />
+          ) : (
+            ""
+          )}
+
+          {lugarMostrado == 'cidade' ? (
+            <Grid
+              mostrar="cidade"
+              background={cidade.img}
+              parentCallback={handleShowCidade}
+            />
+          ) : (
+            ""
+          )}
+
         </div>
       </div>
     </>
