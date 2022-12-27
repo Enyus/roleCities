@@ -3,13 +3,12 @@ import { LoadingContext } from "../pages/_app";
 
 import Botao from "./Botao";
 import Display from "./Display";
+import Grid from "./Grid";
 
 import styles from "../styles/PaginaPrincipal.module.css";
-import Grid from "./Grid";
-import { useRouter } from "next/router";
 
 function PaginaPrincipal(props) {
-  const {loading, setLoading} = useContext(LoadingContext);
+  const { loading, setLoading } = useContext(LoadingContext);
   const [regiao, setRegiao] = useState({
     img: "",
     nome: "",
@@ -21,8 +20,7 @@ function PaginaPrincipal(props) {
     producao: 0,
     img: "",
   });
-  const [lugarMostrado, setLugarMostrado] = useState('regiao')
-  const router = useRouter()
+  const [lugarMostrado, setLugarMostrado] = useState("regiao");
 
   useEffect(() => {
     const buscarRegiao = async () => {
@@ -45,7 +43,6 @@ function PaginaPrincipal(props) {
         img: result.data[0].img,
         nome: result.data[0].nome,
       });
-
     };
 
     buscarRegiao();
@@ -76,7 +73,7 @@ function PaginaPrincipal(props) {
       img: result.data[0].img,
     });
 
-    setLugarMostrado('cidade');
+    setLugarMostrado("cidade");
 
     setLoading(false);
   };
@@ -87,19 +84,23 @@ function PaginaPrincipal(props) {
 
   const handleRetornarRegiao = (event) => {
     console.log(lugarMostrado);
-    setLugarMostrado('regiao');
-  }
+    setLugarMostrado("regiao");
+  };
 
   let tituloMostrado = "";
   let nomeMostrado = "";
 
-  if (lugarMostrado == 'regiao') {
+  if (lugarMostrado == "regiao") {
     tituloMostrado = "Região";
     nomeMostrado = regiao.nome;
   }
-  if (lugarMostrado == 'cidade') {
+  if (lugarMostrado == "cidade") {
     tituloMostrado = "Cidade";
     nomeMostrado = cidade.nome;
+  }
+  if (lugarMostrado == "logs") {
+    tituloMostrado = "Logs"
+    nomeMostrado = regiao.nome;
   }
 
   return (
@@ -125,13 +126,13 @@ function PaginaPrincipal(props) {
 
           <Display id="status" titulo="Status" content="ok" largura="1" />
 
-          {lugarMostrado == 'cidade' ? (
+          {lugarMostrado == "cidade" ? (
             <>
-              <Display 
-                id="tamanho" 
-                titulo="Tamanho" 
-                content={cidade.tamanho} 
-                largura="1" 
+              <Display
+                id="tamanho"
+                titulo="Tamanho"
+                content={cidade.tamanho}
+                largura="1"
               />
 
               <Display
@@ -148,38 +149,39 @@ function PaginaPrincipal(props) {
                 largura="1"
               />
 
-              <Botao
-                type="button"
-                id="retornaregiao"
-                content="Retornar"
-                largura="2"
-                onClick={handleRetornarRegiao}
-              />
-
-              <Botao
-                type="button"
-                id="acoes"
-                content="Ações"
-                largura="2"
-              />
-
+              <Botao type="button" id="acoes" content="Ações" largura="2" />
             </>
           ) : (
             ""
           )}
 
-          <Botao
-            type="button"
-            id="logs"
-            content="Logs"
-            largura="2"
-            // onClick={() => null}
-          />
+          {lugarMostrado !== "logs" ? (
+            <Botao
+              type="button"
+              id="logs"
+              content="Logs"
+              largura="2"
+              onClick={() => setLugarMostrado("logs")}
+            />
+          ) : (
+            ""
+          )}
+
+          {lugarMostrado !== "regiao" ? (
+            <Botao
+              type="button"
+              id="retornaregiao"
+              content="Retornar"
+              largura="2"
+              onClick={handleRetornarRegiao}
+            />
+          ) : (
+            ""
+          )}
         </div>
 
         <div className={styles.principal}>
-
-          {lugarMostrado == 'regiao' ? (
+          {lugarMostrado == "regiao" ? (
             <Grid
               mostrar="regiao"
               background={regiao.img}
@@ -189,7 +191,7 @@ function PaginaPrincipal(props) {
             ""
           )}
 
-          {lugarMostrado == 'cidade' ? (
+          {lugarMostrado == "cidade" ? (
             <Grid
               mostrar="cidade"
               background={cidade.img}
@@ -199,6 +201,7 @@ function PaginaPrincipal(props) {
             ""
           )}
 
+          {lugarMostrado == "logs" ? <h2>Página de Logs</h2> : ""}
         </div>
       </div>
     </>
