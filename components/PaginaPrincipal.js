@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { LoadingContext } from "../pages/_app";
 
 import Botao from "./Botao";
 import Display from "./Display";
@@ -8,7 +9,7 @@ import Grid from "./Grid";
 import { useRouter } from "next/router";
 
 function PaginaPrincipal(props) {
-  const [loading, setLoading] = useState(true);
+  const {loading, setLoading} = useContext(LoadingContext);
   const [regiao, setRegiao] = useState({
     img: "",
     nome: "",
@@ -152,7 +153,6 @@ function PaginaPrincipal(props) {
                 id="retornaregiao"
                 content="Retornar"
                 largura="2"
-                loading={loading}
                 onClick={handleRetornarRegiao}
               />
 
@@ -161,7 +161,6 @@ function PaginaPrincipal(props) {
                 id="acoes"
                 content="Ações"
                 largura="2"
-                loading={loading}
               />
 
             </>
@@ -174,8 +173,7 @@ function PaginaPrincipal(props) {
             id="logs"
             content="Logs"
             largura="2"
-            loading={loading}
-            onClick={() => router.push("logs")}
+            // onClick={() => null}
           />
         </div>
 
