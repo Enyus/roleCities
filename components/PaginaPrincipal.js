@@ -5,6 +5,7 @@ import Display from "./Display";
 
 import styles from "../styles/PaginaPrincipal.module.css";
 import Grid from "./Grid";
+import { useRouter } from "next/router";
 
 function PaginaPrincipal(props) {
   const [loading, setLoading] = useState(true);
@@ -20,6 +21,7 @@ function PaginaPrincipal(props) {
     img: "",
   });
   const [lugarMostrado, setLugarMostrado] = useState('regiao')
+  const router = useRouter()
 
   useEffect(() => {
     const buscarRegiao = async () => {
@@ -173,6 +175,7 @@ function PaginaPrincipal(props) {
             content="Logs"
             largura="2"
             loading={loading}
+            onClick={() => router.push("logs")}
           />
         </div>
 
