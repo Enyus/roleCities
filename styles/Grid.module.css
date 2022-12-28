@@ -28,7 +28,7 @@
     border: solid 0.3rem var(--cor-primaria-texto);
     border-radius: 0.5rem;
     background-size: cover;
-    background-position: center;
+    background-position: top;
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(8, 1fr);

@@ -26,7 +26,7 @@ function Botao(props) {
   }
 
 
-  if (loading) {
+  if (loading && props.type != 'voltar') {
     return (
       <div className={esltiloAplicadoDiv}>
         <button type='button' className={esltiloAplicadoBotao} disabled>
