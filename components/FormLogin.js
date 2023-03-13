@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useRouter } from 'next/router'
 import { UserContext } from "../pages/_app";
+import { LoadingContext } from '../pages/_app';
 
 import EntradaUsuario from './EntradaUsuario';
 import Botao from './Botao';
@@ -9,11 +10,11 @@ import styles from '../styles/Forms.module.css'
 
 export default function FormLogin(props) {
     const {setUser} = useContext(UserContext);
+    const {setLoading} = useContext(LoadingContext);
     const [validated, setValidated] = useState(false);
     const [emailValidated, setEmailValidated] = useState(false);
     const [passwordValidated, setPasswordValidated] = useState(false);
     const [databaseValidation, setDatabaseValidation] = useState({ error: '' })
-    const [loading, setLoading] = useState(false)
 
     const router = useRouter();
 
@@ -92,7 +93,6 @@ export default function FormLogin(props) {
                 id="login"
                 content="Entrar"
                 disabled={!validated}
-                loading={loading}
             />
 
         </form>

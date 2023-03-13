@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { LoadingContext } from '../pages/_app';
 
 import { FaSpinner } from 'react-icons/fa';
 
 import styles from '../styles/Inputs.module.css';
 
 function Botao(props) {
+  const { loading } = useContext(LoadingContext)
+
   let esltiloAplicadoDiv
   let esltiloAplicadoBotao
 
@@ -23,7 +26,7 @@ function Botao(props) {
   }
 
 
-  if (props.loading) {
+  if (loading && props.type != 'voltar') {
     return (
       <div className={esltiloAplicadoDiv}>
         <button type='button' className={esltiloAplicadoBotao} disabled>

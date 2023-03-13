@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { LoadingContext } from '../pages/_app';
 
 import EntradaUsuario from './EntradaUsuario';
 import Botao from './Botao';
@@ -6,14 +7,13 @@ import Botao from './Botao';
 import styles from '../styles/Forms.module.css'
 
 export default function FormCriarUsuario(props) {
-
+    const {setLoading} = useContext(LoadingContext);
     const [validated, setValidated] = useState(false);
     const [emailValidated, setEmailValidated] = useState(false);
     const [nomeValidated, setNomeValidated] = useState(false);
     const [passwordValidated, setPasswordValidated] = useState(false);
     const [confirmaPasswordValidated, setConfirmaPasswordValidated] = useState(false);
     const [databaseValidation, setDatabaseValidation] = useState({ error: '' })
-    const [loading, setLoading] = useState(false)
 
     const registerUser = async (event) => {
         event.preventDefault();
@@ -107,7 +107,6 @@ export default function FormCriarUsuario(props) {
                 id="email"
                 placeholder="nome@email.com"
                 parentCallback={checkEmailValidation}
-                loading={loading}
             />
 
             <EntradaUsuario
@@ -139,7 +138,6 @@ export default function FormCriarUsuario(props) {
                 id="cadastrar"
                 content="Cadastrar"
                 disabled={!validated}
-                loading={loading}
             />
         </form >
     )
